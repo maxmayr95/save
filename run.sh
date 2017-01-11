@@ -3,14 +3,12 @@
 # ----------------------------------------------------------------- #
 # This script executes the compression case study: it takes all the #
 # mp4 videos placed in the folder "mp4" and process them. The       #
-# processing is done in three steps: prepare, identify and encode.  #
+# processing is done in two steps: prepare, and encode.             #
 # The prepare step creates the folder structure needed to execute   #
 # the rest and unpacks the video into frames that are stored in the #
-# corresponding folder. The identify function executes a first      #
-# experiment, to obtain the data to generate the controller and     #
-# calls MATLAB to generate the controller. The encode step executes #
-# the encoder alongside with the control strategy that sets the     #
-# actuator values to obtain the goals.                              #
+# corresponding folder. The encode step executes the encoder        #
+# alongside with the control strategy that sets the actuator values #
+# to obtain the goals.                                              #
 #                                                                   #
 # For each of the frames, the two procedures use as actuators three #
 # parameters of the convert system call:                            #
@@ -18,7 +16,12 @@
 #   - noise (from 0 to 5)                                           #
 #   - sharpen (from 0 to 5)                                         #
 #                                                                   #
-# The controller tries to achieve two objectives:                   #
+# There are three adaptation strategies already designed:           #
+#   - random: just select random values for the actuators           #
+#   - bangbang: implements a bangbang controller                    #
+#   - mpc: implements a model predictive controller                 #
+#                                                                   #
+# The controllers tries to achieve two objectives:                  #
 #   - a setpoint on the similarity with the original frame (ssim)   #
 #   - a setpoint on the frame size after the conversion             #
 # ----------------------------------------------------------------- #
