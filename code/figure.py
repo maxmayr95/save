@@ -17,9 +17,9 @@ axs[0].plot(results[:, 0], results[:, 2], label="Sharpen")
 axs[0].plot(results[:, 0], results[:, 3], label="Noise")
 axs[0].set_ylabel("Actuator value")
 axs[0].legend()
-axs[1].plot(results[:, 0], results[:, 8], label="Similarity")
+axs[1].plot(results[:, 0], results[:, 4], label="Similarity")
 axs[1].set_ylabel("Similarity")
-axs[2].plot(results[:, 0], results[:, 9], label="Size")
+axs[2].plot(results[:, 0], results[:, 5], label="Size")
 axs[2].set_ylabel("Size")
 
 # Save figure
