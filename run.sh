@@ -61,8 +61,7 @@ prepare ()
 		  echo "  [prepare] $V already unpacked"
 	else
 		  echo "  [prepare] $V unpacking"
-		  mplayer -vo jpeg:quality=100:outdir=${ORIG} \
-		  	./mp4/$V.mp4 > /dev/null 2>&1
+		  ffmpeg -i ./mp4/$V.mp4 ./${ORIG}/%08d.jpg > /dev/null 2>&1
 		  echo "  [prepare] $V unpacking terminated"
 	fi
 }
