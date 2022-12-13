@@ -1,6 +1,6 @@
 import numpy as np
-import cvxopt as cvx
-from cvxopt import solvers
+import kvxopt as cvx
+from kvxopt import solvers
 
 solvers.options['show_progress'] = False
 

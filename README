@@ -1,26 +1,29 @@
-********************************************************************************
-Instructions for how to run the experiment code
-********************************************************************************
+# Installation Guide
+Installation of the experiment code is quick and straightforward. The experiment code requires all the libraries mentioned in the `requirements.txt` file and two specific applications: ffmpeg, and imagemagick.
 
-PREREQUISITES:
+## Prequisites:
+* Python 3
 
--- In a normal ubuntu distribution (LTS), you need to install the
-   packages:
-     python-imaging, python-numpy, python-scipy, python-matplotlib,
-     python-cvxopt, mplayer, texlive-base, texlive-latex-extra,
-     texlive-pictures
+### Python Libraries
+> pip install -r ./requirements/requirements.txt
       
-STEP-BY-STEP PREREQUISITES INSTALLATION:
+### Linux
+   > sudo apt-get install ffmpeg
 
-   > sudo apt-get install mplayer
    > sudo apt-get install imagemagick
-   > sudo apt-get install python-imaging python-numpy python-scipy
-   > sudo apt-get install python-matplotlib python-cvxopt
-   > sudo apt-get install texlive-base texlive-pictures
-   > sudo apt-get install texlive-latex-extra
-   
-INSTRUCTIONS:
 
+### MacOs ([Homebrew](https://brew.sh/))
+   > brew install ffmpeg
+
+   > brew install imagemagick
+
+### Windows
+* Download [ffmpeg](https://ffmpeg.org/download.html#build-windows)
+* Download [imagemagick](https://download.imagemagick.org/script/download.php#windows)
+
+Add both applications to your PATH. 
+
+# Instructions
 1) Copy any mp4 video in the folder mp4
    for example download a video from youtube using services like
    http://en.savefrom.net/1-how-to-download-youtube-video/
