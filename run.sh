@@ -55,7 +55,7 @@ prepare ()
 	BASIC_RESULTS=${DIR_RESULTS}/${V}; mkdir -p ${BASIC_RESULTS}
 	ORIG=${DIR_FRAMES}/${V}/${DIR_FRAMES_ORIG}; mkdir -p ${ORIG}
 	PROC=${DIR_FRAMES}/${V}/${DIR_FRAMES_PROC}; mkdir -p ${PROC}
-	
+
 	# unpacking frames if they have not been previously unpacked
 	if find "${ORIG}" -mindepth 1 -print -quit | grep -q .; then
 		  echo "  [prepare] $V already unpacked"
@@ -73,10 +73,10 @@ encode ()
 	ORIG=${DIR_FRAMES}/${V}/${DIR_FRAMES_ORIG};
 	BASIC_PROC=${DIR_FRAMES}/${V}/${DIR_FRAMES_PROC};
 	BASIC_RESULTS=${DIR_RESULTS}/${V};
-	
+
 	if [[ -z "${QUALITY// }" ]]; then QUALITY=0.9; fi
 	if [[ -z "${FRAMESIZE// }" ]]; then FRAMESIZE=8000; fi
-	
+
 	SUFFIX="${METHOD}-Q${QUALITY}-F${FRAMESIZE}"
 	PROC="${BASIC_PROC}/${SUFFIX}"
 	RESULTS="${BASIC_RESULTS}/${SUFFIX}"
@@ -84,20 +84,15 @@ encode ()
 	mkdir -p ${PROC}
 	rm -rf ${RESULTS}/*
 	rm -rf ${PROC}/*
-	
+
 	echo "  [encode] encoding of $V ($QUALITY, $FRAMESIZE)"
 	python $PROGRAM $METHOD \
 		$ORIG $PROC $RESULTS \
 		$QUALITY $FRAMESIZE
 	echo "  [encode] encoding of $V terminated"
-	
+
 	echo "  [encode] creating figure"
-	cp ./code/latex/figure.tex $RESULTS/.
-	cd $RESULTS
-	pdflatex figure.tex &>/dev/null
-	pdflatex figure.tex &>/dev/null
-	rm -rf figure.tex figure.aux figure.log
-	cd ../../..
+	python ./code/figure.py $RESULTS/results.csv $RESULTS/figure.png
 	echo "  [encode] creating figure terminated"
 }
 
