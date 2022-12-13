@@ -8,14 +8,10 @@ Installation of the experiment code is quick and straightforward. The experiment
 `pip install -r ./requirements/requirements.txt`
       
 ### Linux
-   `sudo apt-get install ffmpeg`
-
-   `sudo apt-get install imagemagick`
+   `sudo apt-get install ffmpeg imagemagick`
 
 ### MacOs ([Homebrew](https://brew.sh/))
-   `brew install ffmpeg`
-
-   `brew install imagemagick`
+   `brew install ffmpeg imagemagick`
 
 ### Windows
 * Download [ffmpeg](https://ffmpeg.org/download.html#build-windows)
