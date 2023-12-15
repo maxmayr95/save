@@ -30,8 +30,8 @@ def compute_ssim(img_mat_1, img_mat_2):
             exp(-(((i-5)**2)+((j-5)**2))/(2*(gaussian_kernel_sigma**2)))
 
     #Convert image matrices to double precision (like in the Matlab version)
-    img_mat_1=img_mat_1.astype(numpy.float)
-    img_mat_2=img_mat_2.astype(numpy.float)
+    img_mat_1=img_mat_1.astype(float)
+    img_mat_2=img_mat_2.astype(float)
     
     #Squares of input matrices
     img_mat_1_sq=img_mat_1**2

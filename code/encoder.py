@@ -10,6 +10,7 @@ import libs.utils as ut
 import ctls.mpc as mpccontroller
 import ctls.random as randomcontroller
 import ctls.bangbang as bangbangcontroller
+import ctls.epsilon_greedy as epsgreedycontroller
 
 def image_to_matrix(path):
     img = Image.open(str(path))
@@ -95,6 +96,8 @@ def main(args):
         controller = randomcontroller.RandomController()
     elif mode == "bangbang":
         controller = bangbangcontroller.BangbangController()
+    elif mode == "egreedy":
+        controller = epsgreedycontroller.EpsGreedyController()
 
     # initial values for actuators
     ctl = np.matrix([[100], [0], [0]])
@@ -127,6 +130,9 @@ def main(args):
 
         elif mode == "bangbang":
             ctl = controller.compute_u(current_outputs, setpoints)
+
+        elif mode == "egreedy":
+            ctl = controller.compute_u(current_outputs, setpoints, 0.2)
 
     print(" done")
 
