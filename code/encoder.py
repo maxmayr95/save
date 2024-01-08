@@ -11,6 +11,7 @@ import ctls.mpc as mpccontroller
 import ctls.random as randomcontroller
 import ctls.bangbang as bangbangcontroller
 import ctls.epsilon_greedy as epsgreedycontroller
+import ctls.fuzzy as fuzzycontroller
 
 def image_to_matrix(path):
     img = Image.open(str(path))
@@ -98,6 +99,9 @@ def main(args):
         controller = bangbangcontroller.BangbangController()
     elif mode == "egreedy":
         controller = epsgreedycontroller.EpsGreedyController()
+    elif mode == "fuzzy":
+        controller = fuzzycontroller.FuzzyController()
+
 
     # initial values for actuators
     ctl = np.matrix([[100], [0], [0]])
@@ -133,6 +137,10 @@ def main(args):
 
         elif mode == "egreedy":
             ctl = controller.compute_u(current_outputs, setpoints, 0.2)
+
+        elif mode == "fuzzy":
+            new_quality, new_sharpen, new_noise = controller.compute_u(current_quality, current_size, setpoint_quality, setpoint_compression)
+            ctl = np.matrix([[new_quality], [new_sharpen], [new_noise]])
 
     print(" done")
 
