@@ -139,8 +139,7 @@ def main(args):
             ctl = controller.compute_u(current_outputs, setpoints, 0.2)
 
         elif mode == "fuzzy":
-            new_quality, new_sharpen, new_noise = controller.compute_u(current_quality, current_size, setpoint_quality, setpoint_compression)
-            ctl = np.matrix([[new_quality], [new_sharpen], [new_noise]])
+            ctl = controller.compute_u(current_quality, current_size, setpoint_quality, setpoint_compression)
 
     print(" done")
 
