@@ -90,6 +90,9 @@ def main(args):
     frame_count = len(files)
     final_frame = frame_count + 1
     log = open(folder_results + '/results.csv', 'w')
+    total_diff_ssim = 0
+    total_diff_size = 0
+
 
     if mode == "mpc":
         controller = mpccontroller.initialize_mpc()
@@ -121,6 +124,12 @@ def main(args):
 
         setpoints = np.matrix([[setpoint_quality], [setpoint_compression]])
         current_outputs = np.matrix([[current_quality], [current_size]])
+        if current_quality < setpoint_quality:
+            diff_ssim = abs(current_quality - setpoint_quality)
+            total_diff_ssim += diff_ssim
+        if current_size < setpoint_compression:
+            diff_size = abs(current_size - setpoint_compression)
+            total_diff_size += diff_size
 
         # computing actuator values for the next frame
         if mode == "mpc":
@@ -142,6 +151,8 @@ def main(args):
             ctl = controller.compute_u(current_quality, current_size, setpoint_quality, setpoint_compression)
 
     print(" done")
+    print(f"Total difference in SSIM: {total_diff_ssim}")
+    print(f"Total difference in frame size: {total_diff_size}")
 
 if __name__ == "__main__":
     main(sys.argv)
