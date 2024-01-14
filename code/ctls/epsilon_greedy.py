@@ -3,6 +3,9 @@ import numpy as np
 def relu(x):
     return max(0, x)
 
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
 class EpsGreedyController:
     def __init__(self):
         self.quality = 100 # generate random number
@@ -12,7 +15,7 @@ class EpsGreedyController:
     
     def compute_u(self, current_outputs, setpoints, epsilon):
         # error = relu(setpoints.item(0) - current_outputs.item(0)) + relu(current_outputs.item(1) - setpoints.item(1))
-        self.state['error'].append(relu(setpoints.item(0) - current_outputs.item(0)) + relu(current_outputs.item(1) - setpoints.item(1)))
+        self.state['error'].append(relu(setpoints.item(0) - current_outputs.item(0)) + sigmoid(relu(current_outputs.item(1) - setpoints.item(1))))
         self.state['quality'].append(self.quality)
         self.state['sharpen'].append(self.sharpen)
         self.state['noise'].append(self.noise)
