@@ -12,6 +12,7 @@ import ctls.random as randomcontroller
 import ctls.bangbang as bangbangcontroller
 import ctls.epsilon_greedy as epsgreedycontroller
 import ctls.fuzzy as fuzzycontroller
+import ctls.pid as pidcontroller
 
 def image_to_matrix(path):
     img = Image.open(str(path))
@@ -104,6 +105,8 @@ def main(args):
         controller = epsgreedycontroller.EpsGreedyController()
     elif mode == "fuzzy":
         controller = fuzzycontroller.FuzzyController()
+    elif mode == "pid":
+        controller = pidcontroller.PIDController()
 
 
     # initial values for actuators
@@ -149,6 +152,9 @@ def main(args):
 
         elif mode == "fuzzy":
             ctl = controller.compute_u(current_quality, current_size, setpoint_quality, setpoint_compression)
+
+        elif mode == "pid":
+            ctl = controller.compute_u(current_outputs, setpoints)
 
     print(" done")
     print(f"Total difference in SSIM: {total_diff_ssim}")
